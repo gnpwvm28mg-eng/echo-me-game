@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#12151e"><meta name="description" content="你的走位，就是下一轮的敌人。拖动小团子吃星星，躲开每5秒重演的过去。30秒原创挑战，手机电脑打开即玩。">
+<meta property="og:title" content="别撞昨天的我 · 你能躲开自己吗？"><meta property="og:description" content="每5秒，多一个过去的你。来同一关卡超过我的分数！"><meta property="og:type" content="website">
+<title>别撞昨天的我 · 30秒时空挑战</title>
+<link rel="icon" type="image/svg+xml" href="icon.svg"><link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+<svg class="svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="blob" viewBox="0 0 120 120"><path d="M20 69C13 43 27 19 55 15c28-5 49 11 49 36 0 11-2 18 3 28 4 10-5 18-15 15-9-3-13-2-21 4-8 7-15 6-22 0-6-6-10-7-18-6-16 2-19-12-11-23Z" fill="currentColor"/><ellipse cx="48" cy="53" rx="6" ry="10" fill="#18242c"/><ellipse cx="77" cy="53" rx="6" ry="10" fill="#18242c"/><path d="M57 72q7 7 14-1" fill="none" stroke="#18242c" stroke-width="4" stroke-linecap="round"/><ellipse cx="35" cy="68" rx="7" ry="4" fill="#fff" opacity=".4"/><ellipse cx="87" cy="68" rx="7" ry="4" fill="#fff" opacity=".4"/></symbol>
+<symbol id="star" viewBox="0 0 40 40"><path d="M20 1l5.5 13.5L39 20l-13.5 5.5L20 39l-5.5-13.5L1 20l13.5-5.5Z" fill="currentColor"/></symbol>
+</defs></svg>
+<header class="topbar"><a class="brand" href="./" aria-label="回到首页"><svg><use href="#blob"/></svg><span>昨日出没<span class="brand-en">ECHO / ME</span></span></a><span class="top-tag"><i></i> 30 秒，与自己过招</span><div class="header-actions"><button id="soundBtn" class="icon-btn" aria-label="开启声音" title="声音">声音 关</button><button id="helpBtn" class="icon-btn help-btn" aria-label="玩法说明">?</button></div></header>
+<main class="layout">
+<aside class="editorial">
+<div class="eyebrow"><span class="mini-cross">✳</span> 一个关于「我坑我自己」的游戏</div>
+<h1>最难躲的，<br>是<span>昨天的我。</span><svg class="title-star"><use href="#star"/></svg></h1>
+<p class="lede">你的每一次走位，<br>都会变成下一轮的障碍。</p>
+<div class="feature-list"><div><b>01</b><span>拖动吃星星，给自己续命</span></div><div><b>02</b><span>每 5 秒，过去的你开始重演</span></div><div><b>03</b><span>活过 30 秒，再向朋友下战书</span></div></div>
+<div class="editorial-bottom"><span class="orbit-mark">↺</span><p>没有对手？<br><strong>你自己就够难缠的。</strong></p><span class="small-note">ONE FINGER.<br>TOO MANY YOUS.</span></div>
+</aside>
+<section class="game-column" aria-label="游戏">
+<div id="challengeBanner" class="challenge-banner" hidden><span>↗ 好友下战书</span><strong id="challengeText"></strong></div>
+<div class="game-meta"><span id="modeLabel">自由挑战</span><span>个人最佳 <strong id="bestValue">0</strong></span></div>
+<div id="gameShell" class="game-shell" data-state="intro">
+<div class="hud"><div class="score-cell"><span>星光得分</span><strong id="scoreValue">0</strong></div><div class="time-cell"><span>剩余时间</span><strong><span id="timeValue">30.0</span><small>s</small></strong></div><button id="pauseBtn" class="pause-btn" aria-label="暂停游戏" disabled>Ⅱ</button></div>
+<div class="arena">
+<canvas id="gameCanvas" tabindex="0" aria-label="游戏区域，按住拖动或者用方向键移动，吃星星并躲避影子"></canvas>
+<div id="intro" class="overlay intro">
+<div class="intro-content"><span class="pill">小心 · 过去的你正在赶来</span><h2>别撞<span>昨天的我</span><sup>↙</sup></h2>
+<div class="hero-art" aria-hidden="true"><div class="art-orbit"></div><svg class="hero-ghost"><use href="#blob"/></svg><span class="ghost-label">5 秒前的你</span><svg class="hero-player"><use href="#blob"/></svg><svg class="hero-star"><use href="#star"/></svg><svg class="hero-star tiny"><use href="#star"/></svg><span class="you-label">现在的你 ↗</span></div>
+<p class="intro-copy">每 5 秒，多一个过去的你。<br><strong>别被自己的走位，送走。</strong></p>
+<button id="startBtn" class="btn primary">试试我能活多久 <span>↗</span></button><button id="dailyBtn" class="text-btn">今日同题挑战 <span>→</span></button>
+</div></div>
+<div id="result" class="overlay result" hidden><div class="result-content"><span id="resultEyebrow" class="eyebrow">本次时空报告</span><div class="result-mascot"><svg><use href="#blob"/></svg><span>!</span></div><h2 id="resultTitle">被自己拿捏了</h2><span id="bestBadge" class="best-badge" hidden>个人新纪录 ✦</span><div class="result-number" id="resultScore">0</div><p id="resultStats" class="result-stats"></p><p id="resultQuip" class="result-quip"></p><button id="retryBtn" class="btn primary">不服，再来一次 <span>↻</span></button><div class="result-actions"><button id="shareBtn" class="btn secondary">向朋友下战书 ↗</button><button id="copyBtn" class="btn secondary">复制链接</button></div><div id="shareFallback" hidden><label for="shareUrl">长按复制这条挑战链接</label><div class="url-row"><input id="shareUrl" readonly aria-label="挑战链接"><button id="selectUrlBtn">全选</button></div></div><div class="result-links"><button id="newBtn" class="text-btn">换个时空</button><button id="homeBtn" class="text-btn">回到首页</button></div></div></div>
+<div id="paused" class="overlay paused" hidden><div class="dialog-content"><span class="pause-art">Ⅱ</span><h2>时间暂停了</h2><p>过去的你，也在等你。</p><button id="resumeBtn" class="btn primary">继续穿越 →</button></div></div>
+<div id="help" class="overlay help" hidden><div class="dialog-content"><span class="eyebrow">只要一根手指</span><h2>你，别撞你。</h2><ol><li><b>拖动小绿团</b><span>手机按住拖动；电脑鼠标拖动或方向键 / WASD。</span></li><li><b>吃星星，补能量</b><span>每颗星 +100 分并补充能量。能量耗尽就结束。</span></li><li><b>躲开过去的路线</b><span>每 5 秒生成一个影子，循环重演你刚才的路线。刚出现时有短暂无敌提示。</span></li><li><b>撑过 30 秒</b><span>发出你的挑战链接，朋友将面对相同的星星序列。</span></li></ol><button id="closeHelpBtn" class="btn primary">懂了，来吧 →</button></div></div>
+</div>
+<div class="energy-bar"><div id="energyFill"></div></div><div class="arena-footer"><span><i class="mint-dot"></i> 吃星补能量</span><span><i class="lilac-dot"></i> 过去的你 <strong id="ghostValue">0</strong><small> / 5</small></span></div>
+</div>
+<p class="controls-hint"><span class="touch-hint">☝ 按住拖动</span><span class="desktop-hint">鼠标拖动 / 方向键</span><span>碰到过去的自己，就结束。</span></p>
+</section></main>
+<footer class="page-footer"><span>不怕神对手，就怕昨天的自己。</span><span>无需下载 · 打开即玩</span></footer><div id="toast" role="status" aria-live="polite"></div>
+<script src="game.js?v=1"></script><script src="app.js?v=1"></script>
+</body></html>
